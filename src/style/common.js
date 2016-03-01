@@ -10,7 +10,15 @@ import React, {
 var commonStyles = StyleSheet.create({
     container: {
         flex: 1,
-        marginTop: 20
+        marginTop: 60
+    },
+    flexOne: {
+        flex: 1
+    },
+    load: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

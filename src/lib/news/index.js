@@ -10,44 +10,29 @@ import React, {
     View,
     Text,
     Image,
-    TouchableHighlight
+    TouchableHighlight,
+    NavigatorIOS
 } from 'react-native';
 
-// 引入样式
-import newsStyle from './style';
-import commonStyles from '../../style/common';
+// 引入列表组件
+import ListComponent from './list';
+
+// 引入全局样式
+import styles from '../../style/common'
 
 class news extends Component {
     constructor(props) {
         super(props);
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
-            <View style={commonStyles.container}>
-                <ScrollView>
-
-                </ScrollView>
-            </View>
-        );
-    }
-}
-
-/**
- * @desc 定义每一条日报显示组件
- */
-class List extends Component {
-    render() {
-        return (
-            <TouchableHighlight underlayColor='#dddddd'>
-                <View>
-
-                </View>
-            </TouchableHighlight>
+            <NavigatorIOS
+                style={styles.flexOne}
+                initialRoute={{
+                    title: ListComponent.title,
+                    component: ListComponent.component
+                }}/>
         );
     }
 }
