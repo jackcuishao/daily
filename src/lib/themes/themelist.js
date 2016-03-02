@@ -8,6 +8,7 @@ import React, {
     View,
     Image,
     ScrollView,
+    RefreshControl,
     TouchableHighlight,
     ActivityIndicatorIOS,
     Text
@@ -28,18 +29,27 @@ class ThemeListComponent extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            themeList: []
+            themeList: [],
+            isRefreshing: true
         };
     }
 
     handleThemeListData(themeList) {
         this.setState({
             isLoading: false,
-            themeList: themeList.others
+            themeList: themeList.others,
+            isRefreshing: false
         });
     }
 
     componentWillMount() {
+        this.getData();
+    }
+
+    getData() {
+        this.setState({
+            isRefreshing: true
+        });
         fetch(API.themes.listUrl)
             .then(response => response.json())
             .then(json => this.handleThemeListData(json))
@@ -58,7 +68,16 @@ class ThemeListComponent extends Component {
                 size='large'
                 color='#e78170'
                 style={commonStyle.load}/>) :
-            (<ScrollView style={commonStyle.scrollview}>
+            (<ScrollView
+                style={commonStyle.scrollview}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.isRefreshing}
+                        onRefresh={this.getData.bind(this)}
+                        tintColor='#e78170'
+                        title='正在刷新...'
+                        />
+                }>
                 {theme}
             </ScrollView>);
         return (

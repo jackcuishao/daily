@@ -8,6 +8,7 @@ import React, {
     View,
     Image,
     ScrollView,
+    RefreshControl,
     TouchableHighlight,
     ActivityIndicatorIOS,
     Text
@@ -28,18 +29,27 @@ class HotListComponent extends Component {
         super(props);
         this.state = {
             isLoading: true,
-            hotList: []
+            hotList: [],
+            isRefreshing: true
         };
     }
 
     handleHotListData(hotList) {
         this.setState({
             isLoading: false,
-            hotList: hotList.recent
+            hotList: hotList.recent,
+            isRefreshing: false
         });
     }
 
     componentWillMount() {
+        this.getData();
+    }
+
+    getData() {
+        this.setState({
+            isRefreshing: true
+        });
         fetch(API.hot.listUrl)
             .then(response => response.json())
             .then(json => this.handleHotListData(json))
@@ -58,7 +68,16 @@ class HotListComponent extends Component {
                 size='large'
                 color='#e78170'
                 style={commonStyle.load}/>) :
-            (<ScrollView style={commonStyle.scrollview}>
+            (<ScrollView
+                style={commonStyle.scrollview}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.isRefreshing}
+                        onRefresh={this.getData.bind(this)}
+                        tintColor='#e78170'
+                        title='正在刷新...'
+                        />
+                }>
                 {hot}
             </ScrollView>);
         return (

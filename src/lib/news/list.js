@@ -7,6 +7,7 @@ import React, {
     View,
     Text,
     ScrollView,
+    RefreshControl,
     TouchableHighlight,
     Image,
     ActivityIndicatorIOS
@@ -28,7 +29,8 @@ class ListComponent extends Component {
         this.state = {
             newsList: [],
             date: '',
-            isLoading: true
+            isLoading: true,
+            isRefreshing: false
         };
     }
 
@@ -39,11 +41,20 @@ class ListComponent extends Component {
         this.setState({
             newsList: newsList.stories,
             date: _date.getFullYear() + '-' + (_date.getMonth() + 1) + '-' + (_date.getDay()-1),
-            isLoading: false
+            isLoading: false,
+            isRefreshing: false
         });
+        console.log(this.state);
     }
 
     componentWillMount() {
+        this.getData();
+    }
+
+    getData() {
+        this.setState({
+            isRefreshing: true
+        });
         fetch(API.news.listUrl)
             .then(response => response.json())
             .then(json => this.handleNewListData(json))
@@ -62,7 +73,16 @@ class ListComponent extends Component {
                 size='large'
                 color='#e78170'
                 style={commonStyle.load}/>) :
-            (<ScrollView style={commonStyle.scrollview}>
+            (<ScrollView
+                style={commonStyle.scrollview}
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.isRefreshing}
+                        onRefresh={this.getData.bind(this)}
+                        tintColor='#e78170'
+                        title='正在刷新...'
+                        />
+                }>
                 {news}
             </ScrollView>);
         return (
