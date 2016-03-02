@@ -62,7 +62,7 @@ class ListComponent extends Component {
                 size='large'
                 color='#e78170'
                 style={commonStyle.load}/>) :
-            (<ScrollView style={newStyle.scrollview}>
+            (<ScrollView style={commonStyle.scrollview}>
                 {news}
             </ScrollView>);
         return (
@@ -92,9 +92,9 @@ class NewLine extends Component {
                 onPress={this.getDetails.bind(this, this.props.data.id, this.props.data.title)}
                 >
                 <View>
-                    <View style={newStyle.rowContainer}>
-                        <View style={newStyle.textContainer}>
-                            <Image style={newStyle.thumb} source={{uri: this.props.data.images[0]}} />
+                    <View style={commonStyle.rowContainer}>
+                        <View style={commonStyle.textContainer}>
+                            <Image style={commonStyle.thumb} source={{uri: this.props.data.images[0]}} />
                             <View style={newStyle.profilesInfo}>
                                 <View style={newStyle.info}>
                                     <Text style={newStyle.title}>{this.props.data.title}</Text>
@@ -105,7 +105,7 @@ class NewLine extends Component {
                             </View>
                         </View>
                     </View>
-                    <View style={newStyle.separator}/>
+                    <View style={commonStyle.separator}/>
                 </View>
             </TouchableHighlight>
         );

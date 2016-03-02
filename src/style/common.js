@@ -19,6 +19,29 @@ var commonStyles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    scrollview: {
+        flex: 1
+    },
+    separator: {
+        height: 1,
+        marginLeft: 10,
+        marginRight: 10,
+        backgroundColor: '#dddddd'
+    },
+    rowContainer: {
+        flexDirection: 'row',
+        padding: 10
+    },
+    textContainer: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    thumb: {
+        width: 80,
+        height: 80,
+        marginRight: 10,
+        borderRadius: 10
     }
 });
 

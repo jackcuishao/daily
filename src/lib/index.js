@@ -13,6 +13,8 @@ import commonStyles from '../style/common';
 
 //引入news theme hot三个模块
 import News from './news';
+import Theme from './themes';
+import Hot from './hot';
 
 class DailyEnter extends Component {
     constructor(props) {
@@ -47,7 +49,7 @@ class DailyEnter extends Component {
                     selected={this.state.selectedTab == 'themes_tab'}
                     onPress={this._selectTab.bind(this, 'themes_tab')}
                     >
-                    <Text>主题</Text>
+                    <Theme />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="热门"
@@ -55,7 +57,7 @@ class DailyEnter extends Component {
                     selected={this.state.selectedTab == 'hot_tab'}
                     onPress={this._selectTab.bind(this, 'hot_tab')}
                     >
-                    <Text>热门</Text>
+                    <Hot />
                 </TabBarIOS.Item>
             </TabBarIOS>
         );

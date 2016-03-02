@@ -5,12 +5,6 @@
 'use strict';
 import React, {
     Component,
-    ScrollView,
-    RefreshControl,
-    View,
-    Text,
-    Image,
-    TouchableHighlight,
     NavigatorIOS
 } from 'react-native';
 
@@ -18,7 +12,7 @@ import React, {
 import ListComponent from './list';
 
 // 引入全局样式
-import styles from '../../style/common'
+import styles from '../../style/common';
 
 class news extends Component {
     constructor(props) {
